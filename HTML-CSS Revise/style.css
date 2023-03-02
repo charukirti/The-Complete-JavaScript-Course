@@ -1,0 +1,18 @@
+body {
+  background-color: aqua;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+
+h1 {
+  font-size: 100px;
+}
+
+.first {
+  color: red;
+}
+
+#yr-name {
+  background-color: rgb(255, 136, 0);
+  border: 2px solid rgba(255, 68, 255, 0.637);
+}
