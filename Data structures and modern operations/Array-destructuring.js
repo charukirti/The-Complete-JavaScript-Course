@@ -23,7 +23,6 @@ console.log(a, b, c);
 
 let [main, , secondary] = restaurant.categories;
 
-// const temp = main;
 // main = secondary;
 // secondary = temp;
 
@@ -48,3 +47,9 @@ const nestedArr = [3, 4, [6, 7]];
 
 const[i, ,[j, k]] = nestedArr;
 console.log(i, j, k);
+
+const numbers = [1, 2, 3, 4, 5];
+const [m, , l] = numbers;
+console.log(m); // 1
+console.log(l); // 3
+
