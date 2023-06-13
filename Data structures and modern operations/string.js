@@ -65,19 +65,80 @@ const normalizedEmail = logInEmail.toLowerCase().trim();
 console.log(normalizedEmail);
 
 // Replace
-const priceIN = '288.99₹';
-const priceUS = priceIN.replace('₹', '$');
+const priceIN = "288.99₹";
+const priceUS = priceIN.replace("₹", "$");
 
 console.log(priceUS);
 
-const announcement = 'All passenger come to the boarding door 23, Boarding door 23!';
+const announcement =
+  "All passenger come to the boarding door 23, Boarding door 23!";
 
-console.log(announcement.replaceAll('door', 'gate'));
+console.log(announcement.replaceAll("door", "gate"));
 
 // Booleans
 
-const flight = 'Air_India A320neo';
-console.log(flight.includes('A320'));
-console.log(flight.startsWith('Air'));
+const flight = "Air_India A320neo";
+console.log(flight.includes("A320"));
+console.log(flight.startsWith("Air"));
 
 // practice
+
+const checkBaggage = function (item) {
+  const baggage = item.toLowerCase();
+  if (baggage.includes("knife") || baggage.includes("gun")) {
+    console.log("You are not allowed to board");
+  } else {
+    console.log("Welcome a board");
+  }
+};
+
+checkBaggage("I have a laptop, some food and pocket Knife");
+checkBaggage("I have Sockes and camera");
+checkBaggage("I have some snaks and gun for a safty");
+
+/* ------------------ String part 3 ----------------- */
+
+//split
+console.log("Chennai + Super + Kings".split(" + "));
+
+console.log("Charukirti Chougule".split(" "));
+
+const [firstName, lastName] = "Charukirti Chougule".split(" ");
+
+const newName = ["Mr", firstName, lastName.toUpperCase()].join(" ");
+console.log(newName);
+
+const capitalizeName = function(name){
+  const names = name.split(' ');
+  const namesUpper = [];
+  for(const n of names) {
+    namesUpper.push(n[0].toUpperCase() + n.slice(1));
+  }
+  console.log(namesUpper.join(' '));
+}
+
+capitalizeName('jessica ann smith davis');
+capitalizeName('charukirti Chougule');
+
+
+// Padding
+
+const message = 'Go to gate 23!';
+console.log(message.padStart('25', '+'));
+
+const advice = 'Happy';
+console.log(advice.padEnd('25', ':)'));
+
+const maskCreditCard = function(number) {
+  const str = String(number);
+  const last = str.slice(-4);
+  return last.padStart(str.length, '*')
+}
+
+console.log(maskCreditCard(190000430095));
+
+// repeat 
+const message2= 'Bad weather, all departues delayed...';
+
+console.log(message2.repeat(4));
+

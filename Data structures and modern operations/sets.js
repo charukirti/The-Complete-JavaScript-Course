@@ -159,3 +159,10 @@ const aclean = function (elem) {
 
 const arr = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
 console.log(aclean(arr));
+
+let myset = new Set().add(1)
+.add(2)
+.add({})
+.add({})
+
+console.log("The size is", myset.size);
