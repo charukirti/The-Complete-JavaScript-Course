@@ -9,18 +9,27 @@
 
 - name of the all constructor function starts with the capital letters. 
  
-- With arrow function constructor function will not work. just because arrow function does not have own this keyword.
+- With arrow functions, constructor function will not work. just because arrow functions does not have their own this keyword.
 
 
 */
 
 
 const Person = function(firstName, birthYear){
+// console.log(this);
 
+// instance properties
+this.firstName = firstName;
+this.birthYear = birthYear;
+
+// never create function inside constructor
+// this.calcAge = function(){
+//     console.log(2024 - this.birthYear);
+// }
 }
 
-new Person('John', 2003)
-
+const john = new Person('John', 2003)
+console.log(john);
 /* 
 
 # Behind the scene
@@ -29,4 +38,14 @@ new Person('John', 2003)
 2. function is called, this keyword is assigned to new object created at step one
 3. newly created obj is linked to prototype
 4. function automatically returns empty object
+
 */
+
+/* Based on constructor we can create as many objects we can */
+
+const jenny = new Person('Jenny', 2004)
+const ajay = new Person('Ajay', 2003)
+console.log(jenny, ajay);
+
+
+console.log(john instanceof Person);
