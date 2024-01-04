@@ -15,21 +15,21 @@
 */
 
 
-const Person = function(firstName, birthYear){
-// console.log(this);
+const Person = function (firstName, birthYear) {
+    // console.log(this);
 
-// instance properties
-this.firstName = firstName;
-this.birthYear = birthYear;
+    // instance properties
+    this.firstName = firstName;
+    this.birthYear = birthYear;
 
-// never create function inside constructor
-// this.calcAge = function(){
-//     console.log(2024 - this.birthYear);
-// }
+    // never create function inside constructor
+    // this.calcAge = function(){
+    //     console.log(2024 - this.birthYear);
+    // }
 }
 
 const john = new Person('John', 2003)
-console.log(john);
+// console.log(john);
 /* 
 
 # Behind the scene
@@ -45,7 +45,21 @@ console.log(john);
 
 const jenny = new Person('Jenny', 2004)
 const ajay = new Person('Ajay', 2003)
-console.log(jenny, ajay);
+// console.log(jenny, ajay);
 
 
-console.log(john instanceof Person);
+// console.log(john instanceof Person);
+
+
+/* Prototypes */
+
+console.log(Person.prototype);
+
+Person.prototype.calcAge = function () {
+    console.log(2023 - this.birthYear);
+}
+
+john.calcAge()
+jenny.calcAge()
+
+console.log(john.__proto__);
