@@ -53,13 +53,43 @@ const ajay = new Person('Ajay', 2003)
 
 /* Prototypes */
 
-console.log(Person.prototype);
+// console.log(Person.prototype);
 
 Person.prototype.calcAge = function () {
     console.log(2023 - this.birthYear);
 }
 
-john.calcAge()
-jenny.calcAge()
+// john.calcAge()
+// jenny.calcAge()
+
+// console.log(john.__proto__);
+
+/* prototyple inheritance */
+
 
 console.log(john.__proto__);
+console.log(john.__proto__.__proto__.__proto__);
+
+console.log(Person.prototype.constructor);
+
+const arr = [3, 6, 4, 5, 6, 9, 3]
+console.log(arr.__proto__ === Array.prototype);
+console.log(arr.__proto__.__proto__);
+
+Array.prototype.unique = function() {
+    return[...new Set(this)]
+}
+
+console.log(arr.unique());
+
+const h1 = document.querySelector('h1')
+console.dir(h1);
+
+const obj = {
+    name: 'Charu',
+    hello: ()=>{
+        console.log('Hello', this.name);
+    }
+}
+
+obj.hello()
