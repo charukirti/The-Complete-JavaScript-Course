@@ -67,23 +67,23 @@ Person.prototype.calcAge = function () {
 /* prototyple inheritance */
 
 
-console.log(john.__proto__);
-console.log(john.__proto__.__proto__.__proto__);
+// console.log(john.__proto__);
+// console.log(john.__proto__.__proto__.__proto__);
 
-console.log(Person.prototype.constructor);
+// console.log(Person.prototype.constructor);
 
 const arr = [3, 6, 4, 5, 6, 9, 3]
-console.log(arr.__proto__ === Array.prototype);
-console.log(arr.__proto__.__proto__);
+// console.log(arr.__proto__ === Array.prototype);
+// console.log(arr.__proto__.__proto__);
 
 Array.prototype.unique = function() {
     return[...new Set(this)]
 }
 
-console.log(arr.unique());
+// console.log(arr.unique());
 
-const h1 = document.querySelector('h1')
-console.dir(h1);
+// const h1 = document.querySelector('h1')
+// console.dir(h1);
 
 const obj = {
     name: 'Charu',
@@ -92,4 +92,89 @@ const obj = {
     }
 }
 
-obj.hello()
+// obj.hello()
+
+
+/* TODO: Solving coding challenge 1 */
+
+const Car = function(make, speed) {
+    this.make = make;
+    this.speed = speed;
+}
+
+Car.prototype.acclerate = function(){
+    this.speed += 20;
+    console.log(`${this.make} is going at ${this.speed} Km/h after accelerate`);
+}
+
+Car.prototype.break = function() {
+    this.speed -= 5;
+    console.log(`${this.make} is going at ${this.speed} Km/h after applying break`);
+}
+
+
+const toyota = new Car('Toyota', 140)
+const tata = new Car('Nexus', 130)
+
+// console.log(toyota, tata);
+
+// toyota.acclerate()
+// toyota.acclerate()
+// toyota.break()
+// toyota.acclerate()
+// toyota.acclerate()
+
+
+// tata.acclerate()
+// tata.acclerate()
+// tata.break()
+// tata.acclerate()
+// tata.acclerate()
+
+/* TODO: Learning about class in js */
+// Class expression
+// const PersonCl = class()
+
+/* 
+* About Javascript Classes
+- JavaScript class is a blueprint for creating objects.
+- Class encapsulates the data and functions which manipulates the data
+- JavaScript are synthatic sugar over prototypal inheriatance. Or we can say ES6 classes are just functions
+*/
+
+// class declaration
+class PersonCl {
+    constructor(firstName, birthYear){
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    }
+    // Here methods will be added to .prototype property automatically
+    calcAge() {
+        console.log(2024 - this.birthYear);
+    }
+}
+
+const jane = new PersonCl('Jane', 2002)
+
+console.log(jane);
+jane.calcAge()
+
+console.log(jane.__proto__ === PersonCl.prototype);
+
+// Adding method manually using .prototype
+
+PersonCl.prototype.greet = function() {
+    console.log(`Hello, ${this.firstName}`);
+}
+
+jane.greet()
+
+
+/* 
+Things to know about class
+
+1. class in js are NOT hoisted
+2. like functions class is also 'first class citizens'
+3. classes are executed in strict mode
+
+*/
