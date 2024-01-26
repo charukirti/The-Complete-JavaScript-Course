@@ -168,7 +168,13 @@ class PersonCl {
     get fullName() {
         return this._fullName
     }
+
+    static getName(){
+        return this.arguments
+    }
 }
+
+console.log(PersonCl.getName());
 
 const jane = new PersonCl('Jane Doe', 2002)
 console.log(jane.age);
@@ -224,3 +230,10 @@ const account = {
 
 account.latest = 500;
 // console.log(account.movements);
+
+
+/* Learning about static methods */
+
+// calling static method with the name of class
+
+PersonCl.getName()
