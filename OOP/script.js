@@ -144,22 +144,38 @@ const tata = new Car('Nexus', 130)
 
 // class declaration
 class PersonCl {
-    constructor(firstName, birthYear){
-        this.firstName = firstName;
+    constructor(fullName, birthYear){
+        this.fullName = fullName;
         this.birthYear = birthYear;
     }
     // Here methods will be added to .prototype property automatically
     calcAge() {
         console.log(2024 - this.birthYear);
     }
+
+   get age() {
+        return 2025 - this.birthYear
+    }
+
+    set fullName(name) {
+        if(name.includes(' ')){
+            this._fullName = name;
+        }else {
+            alert(`${name}, is not full name!`)
+        }
+    }
+
+    get fullName() {
+        return this._fullName
+    }
 }
 
-const jane = new PersonCl('Jane', 2002)
-
-console.log(jane);
+const jane = new PersonCl('Jane Doe', 2002)
+console.log(jane.age);
+// console.log(jane);
 jane.calcAge()
-
-console.log(jane.__proto__ === PersonCl.prototype);
+console.log(jane._fullName);
+// console.log(jane.__proto__ === PersonCl.prototype);
 
 // Adding method manually using .prototype
 
@@ -167,7 +183,7 @@ PersonCl.prototype.greet = function() {
     console.log(`Hello, ${this.firstName}`);
 }
 
-jane.greet()
+// jane.greet()
 
 
 /* 
@@ -178,3 +194,33 @@ Things to know about class
 3. classes are executed in strict mode
 
 */
+
+const joe = new PersonCl('joe', 2004)
+
+// TODO Learning about getters and setters
+
+/* 
+
+* using getters and setters on  normal object litrals
+*/
+const account = {
+    owner : 'jonas',
+    movements : [200, 530, 120, 300],
+
+   get latest() { /* This becomes the property */
+        return this.movements.pop()
+    },
+
+    // similarly we have set method to set the property
+
+    set latest(mov) { /* in this we have to insert one parameter in it */
+        return this.movements.push(mov)
+    }
+}
+
+// console.log(account.latest); /* so, we have to use dot notation to get the property */
+
+/* Like we used to set new value to the property in object we have to use same way like this */
+
+account.latest = 500;
+// console.log(account.movements);
