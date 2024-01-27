@@ -289,3 +289,21 @@ function createUser(firstName, lastName) {
 let getUser = createUser('Charukirti', 'Chougule')
 console.log(getUser.getFullName());
 
+// Ex 3
+
+// creating prototype object
+
+const user = {
+    name : 'John',
+    greet() {
+       console.log(`Hello, Good morning ${this.name}`)
+    }
+}
+
+// Creating a New Object with Inheritance
+
+const newUser = Object.create(user) // creates new object with name 'newUser' and assignes it's prototype to user object, which means 'newUser' can have the access of the properties and methods of user object.
+
+newUser.name = 'Amit' // overriding property 
+newUser.greet() // inherited greet method from the user object
+
