@@ -76,8 +76,8 @@ const arr = [3, 6, 4, 5, 6, 9, 3]
 // console.log(arr.__proto__ === Array.prototype);
 // console.log(arr.__proto__.__proto__);
 
-Array.prototype.unique = function() {
-    return[...new Set(this)]
+Array.prototype.unique = function () {
+    return [...new Set(this)]
 }
 
 // console.log(arr.unique());
@@ -87,7 +87,7 @@ Array.prototype.unique = function() {
 
 const obj = {
     name: 'Charu',
-    hello: ()=>{
+    hello: () => {
         console.log('Hello', this.name);
     }
 }
@@ -97,17 +97,17 @@ const obj = {
 
 /* TODO: Solving coding challenge 1 */
 
-const Car = function(make, speed) {
+const Car = function (make, speed) {
     this.make = make;
     this.speed = speed;
 }
 
-Car.prototype.acclerate = function(){
+Car.prototype.acclerate = function () {
     this.speed += 20;
     console.log(`${this.make} is going at ${this.speed} Km/h after accelerate`);
 }
 
-Car.prototype.break = function() {
+Car.prototype.break = function () {
     this.speed -= 5;
     console.log(`${this.make} is going at ${this.speed} Km/h after applying break`);
 }
@@ -144,7 +144,7 @@ const tata = new Car('Nexus', 130)
 
 // class declaration
 class PersonCl {
-    constructor(fullName, birthYear){
+    constructor(fullName, birthYear) {
         this.fullName = fullName;
         this.birthYear = birthYear;
     }
@@ -153,15 +153,15 @@ class PersonCl {
         console.log(2024 - this.birthYear);
     }
 
-   get age() {
+    get age() {
         return 2025 - this.birthYear
     }
 
     set fullName(name) {
-        if(name.includes(' ')){
+        if (name.includes(' ')) {
             this._fullName = name;
-        }else {
-            alert(`${name}, is not full name!`)
+        } else {
+            console.log(`${name}, is not full name!`)
         }
     }
 
@@ -169,12 +169,12 @@ class PersonCl {
         return this._fullName
     }
 
-    static getName(){
+    static getName() {
         return this.arguments
     }
 }
 
-console.log(PersonCl.getName());
+// console.log(PersonCl.getName());
 
 const jane = new PersonCl('Jane Doe', 2002)
 console.log(jane.age);
@@ -185,7 +185,7 @@ console.log(jane._fullName);
 
 // Adding method manually using .prototype
 
-PersonCl.prototype.greet = function() {
+PersonCl.prototype.greet = function () {
     console.log(`Hello, ${this.firstName}`);
 }
 
@@ -210,10 +210,10 @@ const joe = new PersonCl('joe', 2004)
 * using getters and setters on  normal object litrals
 */
 const account = {
-    owner : 'jonas',
-    movements : [200, 530, 120, 300],
+    owner: 'jonas',
+    movements: [200, 530, 120, 300],
 
-   get latest() { /* This becomes the property */
+    get latest() { /* This becomes the property */
         return this.movements.pop()
     },
 
@@ -236,4 +236,56 @@ account.latest = 500;
 
 // calling static method with the name of class
 
-PersonCl.getName()
+// PersonCl.getName()
+
+
+// TODO Learning about object.create 
+
+/* 
+*The Object.create() method creates a new object using an existing object as the prototype of the new object:
+
+* syntax -> Object.create(proto, [propertiesObject])
+ */
+
+const personProto = {
+    calcAge() {
+        console.log(2024 - this.birthYear);
+    },
+
+    init(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    }
+}
+
+const steven = Object.create(personProto)
+console.log(steven);
+
+steven.name = 'Steve';
+steven.birthYear = 2000;
+steven.calcAge()
+
+// ex-2
+
+const ana = Object.create(personProto)
+ana.init('Ana', 1996)
+ana.calcAge()
+
+const personAction = {
+    getFullName() {
+        return `Your fullname is ${this.firstName} ${this.lastName}`
+    }
+}
+
+function createUser(firstName, lastName) {
+    let user = Object.create(personAction)
+    user.firstName = firstName;
+    user.lastName = lastName;
+
+    return user
+}
+
+
+let getUser = createUser('Charukirti', 'Chougule')
+console.log(getUser.getFullName());
+
