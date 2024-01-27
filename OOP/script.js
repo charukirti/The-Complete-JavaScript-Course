@@ -97,24 +97,24 @@ const obj = {
 
 /* TODO: Solving coding challenge 1 */
 
-const Car = function (make, speed) {
-    this.make = make;
-    this.speed = speed;
-}
+// const Car = function (make, speed) {
+//     this.make = make;
+//     this.speed = speed;
+// }
 
-Car.prototype.acclerate = function () {
-    this.speed += 20;
-    console.log(`${this.make} is going at ${this.speed} Km/h after accelerate`);
-}
+// Car.prototype.acclerate = function () {
+//     this.speed += 20;
+//     console.log(`${this.make} is going at ${this.speed} Km/h after accelerate`);
+// }
 
-Car.prototype.break = function () {
-    this.speed -= 5;
-    console.log(`${this.make} is going at ${this.speed} Km/h after applying break`);
-}
+// Car.prototype.break = function () {
+//     this.speed -= 5;
+//     console.log(`${this.make} is going at ${this.speed} Km/h after applying break`);
+// }
 
 
-const toyota = new Car('Toyota', 140)
-const tata = new Car('Nexus', 130)
+// const toyota = new Car('Toyota', 140)
+// const tata = new Car('Nexus', 130)
 
 // console.log(toyota, tata);
 
@@ -142,52 +142,52 @@ const tata = new Car('Nexus', 130)
 - JavaScript are synthatic sugar over prototypal inheriatance. Or we can say ES6 classes are just functions
 */
 
-// class declaration
-class PersonCl {
-    constructor(fullName, birthYear) {
-        this.fullName = fullName;
-        this.birthYear = birthYear;
-    }
-    // Here methods will be added to .prototype property automatically
-    calcAge() {
-        console.log(2024 - this.birthYear);
-    }
+// // class declaration
+// class PersonCl {
+//     constructor(fullName, birthYear) {
+//         this.fullName = fullName;
+//         this.birthYear = birthYear;
+//     }
+//     // Here methods will be added to .prototype property automatically
+//     calcAge() {
+//         console.log(2024 - this.birthYear);
+//     }
 
-    get age() {
-        return 2025 - this.birthYear
-    }
+//     get age() {
+//         return 2025 - this.birthYear
+//     }
 
-    set fullName(name) {
-        if (name.includes(' ')) {
-            this._fullName = name;
-        } else {
-            console.log(`${name}, is not full name!`)
-        }
-    }
+//     set fullName(name) {
+//         if (name.includes(' ')) {
+//             this._fullName = name;
+//         } else {
+//             console.log(`${name}, is not full name!`)
+//         }
+//     }
 
-    get fullName() {
-        return this._fullName
-    }
+//     get fullName() {
+//         return this._fullName
+//     }
 
-    static getName() {
-        return this.arguments
-    }
-}
+//     static getName() {
+//         return this.arguments
+//     }
+// }
 
 // console.log(PersonCl.getName());
 
-const jane = new PersonCl('Jane Doe', 2002)
-console.log(jane.age);
-// console.log(jane);
-jane.calcAge()
-console.log(jane._fullName);
+// const jane = new PersonCl('Jane Doe', 2002)
+// console.log(jane.age);
+// // console.log(jane);
+// jane.calcAge()
+// console.log(jane._fullName);
 // console.log(jane.__proto__ === PersonCl.prototype);
 
 // Adding method manually using .prototype
 
-PersonCl.prototype.greet = function () {
-    console.log(`Hello, ${this.firstName}`);
-}
+// PersonCl.prototype.greet = function () {
+//     console.log(`Hello, ${this.firstName}`);
+// }
 
 // jane.greet()
 
@@ -201,7 +201,7 @@ Things to know about class
 
 */
 
-const joe = new PersonCl('joe', 2004)
+// const joe = new PersonCl('joe', 2004)
 
 // TODO Learning about getters and setters
 
@@ -259,11 +259,11 @@ const personProto = {
 }
 
 const steven = Object.create(personProto)
-console.log(steven);
+// console.log(steven);
 
 steven.name = 'Steve';
 steven.birthYear = 2000;
-steven.calcAge()
+// steven.calcAge()
 
 // ex-2
 
@@ -287,7 +287,7 @@ function createUser(firstName, lastName) {
 
 
 let getUser = createUser('Charukirti', 'Chougule')
-console.log(getUser.getFullName());
+// console.log(getUser.getFullName());
 
 // Ex 3
 
@@ -304,6 +304,127 @@ const user = {
 
 const newUser = Object.create(user) // creates new object with name 'newUser' and assignes it's prototype to user object, which means 'newUser' can have the access of the properties and methods of user object.
 
-newUser.name = 'Amit' // overriding property 
-newUser.greet() // inherited greet method from the user object
+// newUser.name = 'Amit' // overriding property 
+// newUser.greet() // inherited greet method from the user object
 
+
+
+// todo: Learning about Inheritance between Classes : constructor functions
+
+const Newperson = function (firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+}
+
+Newperson.prototype.calcAge = function(){
+    console.log(2037-this.birthYear)
+}
+
+const Student = function(firstName, birthYear, course){
+    Newperson.call(this, firstName, birthYear, course)
+    this.course = course;
+}
+
+Student.prototype = Object.create(Newperson)
+
+
+Student.prototype.introduce = function(){
+    console.log(`My name is ${this.firstName} and I study ${this.course}`);
+}
+
+const rohan = new Student('Rohan', 2019, 'Mechanical Engineering')
+
+rohan.introduce();
+
+const Car = function (make, speed) {
+    this.make = make;
+    this.speed = speed;
+}
+
+Car.prototype.acclerate = function () {
+    this.speed += 20;
+    console.log(`${this.make} is going at ${this.speed} Km/h after accelerate`);
+}
+
+Car.prototype.break = function () {
+    this.speed -= 5;
+    console.log(`${this.make} is going at ${this.speed} Km/h after applying break`);
+}
+
+const EV = function(make, speed, charge){
+    Car.call(this, make, speed)
+    this.charge = charge;
+}
+
+EV.prototype = Object.create(Car.prototype)
+
+EV.prototype.chargeBattery = function(chargeTo){
+    this.charge = chargeTo
+}
+
+EV.prototype.acclerate = function() {
+    this.speed += 20;
+    this.charge--;
+    console.log(`${this.make} is going at ${this.speed} Km/h with the charge of ${this.charge}`);
+}
+const tesla = new EV('Tesla', 120, 23)
+tesla.chargeBattery(90)
+console.log(tesla)
+tesla.break()
+tesla.acclerate()
+tesla.break()
+
+
+// todo learning about ES6 class inheritance
+
+// class declaration
+class PersonCl {
+    constructor(fullName, birthYear) {
+        this.fullName = fullName;
+        this.birthYear = birthYear;
+    }
+    // Here methods will be added to .prototype property automatically
+    calcAge() {
+        console.log(2024 - this.birthYear);
+    }
+
+    get age() {
+        return 2025 - this.birthYear
+    }
+
+    set fullName(name) {
+        if (name.includes(' ')) {
+            this._fullName = name;
+        } else {
+            console.log(`${name}, is not full name!`)
+        }
+    }
+
+    get fullName() {
+        return this._fullName
+    }
+
+    static getName() {
+        return this.arguments
+    }
+    introduce(){
+        console.log(`My name is ${this.fullName} and I study ${this.course}`);
+    }
+
+    calcAge() { // overrided method from parent class
+        console.log(`I'm ${2027 - this.birthYear} years old`);
+    }
+}
+
+class studentCl extends PersonCl{
+    constructor(fullName, birthYear, course){
+        // Always needs to happen first
+        super(fullName, birthYear)
+        this.course = course
+    }
+}
+
+const martha  = new studentCl('Martha jones', 2002, 'computer science')
+
+martha.introduce()
+martha.calcAge()
