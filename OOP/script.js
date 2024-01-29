@@ -247,29 +247,29 @@ account.latest = 500;
 * syntax -> Object.create(proto, [propertiesObject])
  */
 
-const personProto = {
-    calcAge() {
-        console.log(2024 - this.birthYear);
-    },
+// const personProto = {
+//     calcAge() {
+//         console.log(2024 - this.birthYear);
+//     },
 
-    init(firstName, birthYear) {
-        this.firstName = firstName;
-        this.birthYear = birthYear;
-    }
-}
+//     init(firstName, birthYear) {
+//         this.firstName = firstName;
+//         this.birthYear = birthYear;
+//     }
+// }
 
-const steven = Object.create(personProto)
+// const steven = Object.create(personProto)
 // console.log(steven);
 
-steven.name = 'Steve';
-steven.birthYear = 2000;
+// steven.name = 'Steve';
+// steven.birthYear = 2000;
 // steven.calcAge()
 
 // ex-2
 
-const ana = Object.create(personProto)
-ana.init('Ana', 1996)
-ana.calcAge()
+// const ana = Object.create(personProto)
+// ana.init('Ana', 1996)
+// ana.calcAge()
 
 const personAction = {
     getFullName() {
@@ -294,9 +294,9 @@ let getUser = createUser('Charukirti', 'Chougule')
 // creating prototype object
 
 const user = {
-    name : 'John',
+    name: 'John',
     greet() {
-       console.log(`Hello, Good morning ${this.name}`)
+        console.log(`Hello, Good morning ${this.name}`)
     }
 }
 
@@ -316,11 +316,11 @@ const Newperson = function (firstName, birthYear) {
     this.birthYear = birthYear;
 }
 
-Newperson.prototype.calcAge = function(){
-    console.log(2037-this.birthYear)
+Newperson.prototype.calcAge = function () {
+    console.log(2037 - this.birthYear)
 }
 
-const Student = function(firstName, birthYear, course){
+const Student = function (firstName, birthYear, course) {
     Newperson.call(this, firstName, birthYear, course)
     this.course = course;
 }
@@ -328,7 +328,7 @@ const Student = function(firstName, birthYear, course){
 Student.prototype = Object.create(Newperson)
 
 
-Student.prototype.introduce = function(){
+Student.prototype.introduce = function () {
     console.log(`My name is ${this.firstName} and I study ${this.course}`);
 }
 
@@ -351,18 +351,18 @@ Car.prototype.break = function () {
     console.log(`${this.make} is going at ${this.speed} Km/h after applying break`);
 }
 
-const EV = function(make, speed, charge){
+const EV = function (make, speed, charge) {
     Car.call(this, make, speed)
     this.charge = charge;
 }
 
 EV.prototype = Object.create(Car.prototype)
 
-EV.prototype.chargeBattery = function(chargeTo){
+EV.prototype.chargeBattery = function (chargeTo) {
     this.charge = chargeTo
 }
 
-EV.prototype.acclerate = function() {
+EV.prototype.acclerate = function () {
     this.speed += 20;
     this.charge--;
     console.log(`${this.make} is going at ${this.speed} Km/h with the charge of ${this.charge}`);
@@ -407,7 +407,7 @@ class PersonCl {
     static getName() {
         return this.arguments
     }
-    introduce(){
+    introduce() {
         console.log(`My name is ${this.fullName} and I study ${this.course}`);
     }
 
@@ -416,15 +416,145 @@ class PersonCl {
     }
 }
 
-class studentCl extends PersonCl{
-    constructor(fullName, birthYear, course){
+class studentCl extends PersonCl {
+    constructor(fullName, birthYear, course) {
         // Always needs to happen first
         super(fullName, birthYear)
         this.course = course
     }
 }
 
-const martha  = new studentCl('Martha jones', 2002, 'computer science')
+const martha = new studentCl('Martha jones', 2002, 'computer science')
 
-martha.introduce()
-martha.calcAge()
+// martha.introduce()
+// martha.calcAge()
+
+// creating default credentials
+
+const defaultCredentials = {
+    email: 'charukirticc@gmail.com',
+    uniqueId: 'defaultUniquw'
+}
+
+class userBase {
+    constructor(name, email) {
+        this.name = name;
+        this.email = email;
+        this.uniqueId = Math.random().toString(36).substring(2, 15);
+        this.isLoggedIn = false; // Track login status
+    }
+
+    loggedIn() {
+        this.isLoggedIn = true;
+        console.log(`${this.name}, welcome to our page!`);
+    }
+
+    logout() {
+        this.isLoggedIn = false;
+        console.log(`${this.name}, you have been logged out.`);
+    }
+
+    useDefaultCredentials() {
+        this.email = defaultCredentials.email;
+        this.uniqueId = defaultCredentials.uniqueId;
+
+        const success = this.checkCredentials(defaultCredentials.email, "correctpassword");
+
+        if (success) {
+            this.loggedIn = true;
+            console.log(`${this.name}, welcome back!`);
+        } else {
+            console.error(`${this.name}, incorrect default credentials. Please try again or log in.`);
+        }
+    }
+
+    checkCredentials(providedEmail, providedPassword) {
+        if (providedEmail === defaultCredentials.email && providedPassword === "correctpassword") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+}
+
+// const hc12 = new userBase('Charu', 'charukirticc2609@gmail.com', defaultCredentials.uniqueId)
+// console.log(hc12);
+// hc12.useDefaultCredentials()
+// console.log(hc12);
+
+const PersonProto = {
+    calcAge() {
+        console.log(2037 - this.birthYear)
+    },
+
+    init(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    },
+};
+
+const steven = Object.create(PersonProto)
+
+const studentProto = Object.create(PersonProto)
+studentProto.init = function(firstName, birthYear, course){
+    PersonProto.init.call(this, firstName, birthYear, course)
+    this.course = course;
+}
+
+studentProto.introduce = function() {
+    console.log(`My name is ${this.firstName} and I study ${this.course}`)
+}
+
+const jay = Object.create(studentProto)
+jay.init('Jay', 2010, 'Mechanical engineering')
+
+jay.introduce()
+jay.calcAge()
+
+
+// Another class example 
+
+class Account {
+    constructor(owner, currency, pin) {
+        this.owner = owner;
+        this.currency = currency;
+        this.pin = pin;
+        this.movements = [];
+        this.locale = navigator.language;
+
+        console.log(`Thanks for opening an account, ${owner}`);
+    }
+
+    // public interface
+
+    // method to deposit 
+    deposit(value){
+        this.movements.push(value)
+    }
+
+    // Method to withdrawl 
+    withdraw(value) {
+        this.deposit(-value)
+    }
+
+    approveLoan(value) {
+        return true;
+    }
+
+    requestLoan(value) {
+        if(this.approveLoan(value)){
+            this.deposit(value)
+            console.log(`Loan approved`);
+        }
+    }
+}
+
+
+const acc1 = new Account('jonas', 'Rupee', 1111)
+// console.log(acc1);
+
+// acc1.deposit(250)
+// acc1.deposit(460)
+// acc1.withdraw(145)
+// acc1.requestLoan(250)
