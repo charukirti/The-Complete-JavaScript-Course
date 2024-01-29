@@ -516,12 +516,20 @@ jay.calcAge()
 // Another class example 
 
 class Account {
+    // 1) public fields (instances)
+    locale = navigator.language;
+    
+    // 2) private fields
+    #movements = [];
+
+
     constructor(owner, currency, pin) {
         this.owner = owner;
         this.currency = currency;
-        this.pin = pin;
-        this.movements = [];
-        this.locale = navigator.language;
+        this._pin = pin;
+        // protected property
+        // this._movements = [];
+        // this.locale = navigator.language;
 
         console.log(`Thanks for opening an account, ${owner}`);
     }
@@ -530,7 +538,7 @@ class Account {
 
     // method to deposit 
     deposit(value){
-        this.movements.push(value)
+        this.#movements.push(value)
     }
 
     // Method to withdrawl 
@@ -538,7 +546,7 @@ class Account {
         this.deposit(-value)
     }
 
-    approveLoan(value) {
+    _approveLoan(value) {
         return true;
     }
 
@@ -548,13 +556,26 @@ class Account {
             console.log(`Loan approved`);
         }
     }
+
+    getMovement(){
+        return  this.#movements
+    }
 }
 
 
 const acc1 = new Account('jonas', 'Rupee', 1111)
 // console.log(acc1);
 
-// acc1.deposit(250)
+// acc1.deposit(250)    
 // acc1.deposit(460)
 // acc1.withdraw(145)
 // acc1.requestLoan(250)
+
+/* Incapsultion */
+console.log(acc1.getMovement());
+
+
+// Public fields
+// private fields
+// public methods
+// private methods
