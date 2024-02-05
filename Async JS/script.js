@@ -86,6 +86,12 @@ const countriesContainer = document.querySelector('.countries');
 // console.log(request);
 
 
+const renderError = function (msg) {
+  countriesContainer.style.opacity = 1;
+  countriesContainer.insertAdjacentText('beforeend', msg)
+}
+
+
 const renderCountry = function (data, className = '') {
   const html = `
   <article class="country ${className}">
@@ -105,25 +111,69 @@ const renderCountry = function (data, className = '') {
   countriesContainer.style.opacity = 1;
 };
 
-const getCountryData = function (country) {
-  fetch(`https://restcountries.com/v2/name/${country}`)
-  .then((response => response.json()))
-  .then((data) => {
-    console.log(data);
-    renderCountry(data[0])
+// const getCountryData = function (country) {
+//   fetch(`https://restcountries.com/v2/name/${country}`)
+//     .then((response =>{
 
-    const neighbour = data[0].borders?.[0]
+//         if(!response.ok){
+//           throw new Error(`Country not found [${response.status}]`)
+//         }
 
-    return fetch(`https://restcountries.com/v2/name/${neighbour}`)
+//        return response.json()
+//       }))
+//     .then((data) => {
+//       console.log(data);
+//       renderCountry(data[0])
+
+//       const neighbour = data[0].borders?.[0]
+
+//       return fetch(`https://restcountries.com/v2/name/${neighbour}`)
+//     })
+//     .then(response => response.json())
+//     .then(data => renderCountry(data[0], 'neighbour'))
+//     .catch(err => {
+//       // console.log(`${err} 😭`)
+
+//       renderError(`Something went wrong 😭 ${err.message}`)
+//     })
+//     .finally(()=>{
+//       // used to hide loading spinner
+
+//     })
+// }
+
+/* ############# Challenge 1 ############### */
+
+const whereIam = function(lat, lag){
+  fetch(`https://geocode.xyz/${lat},${lag}?geoit=json&auth=543362127671511670651x18557`)
+  .then(res => {
+      console.log(res);
+      if(!res.ok) throw new Error(`Problem with geocoding ${res.status}`)
+      return res.json()
   })
-  .then(response => response.json())
-  .then(data => renderCountry(data[0], 'neighbour'))
-  .catch(err => console.log(`${err} 😭`))
+  .then(data => {
+      console.log(data);
+      console.log(`You are in ${data.city}, ${data.country}`);
+
+      return fetch(``)
+  })
+  .then(res => {
+      if(!res.ok)
+          throw new Error(`Country not found [${res.status}]`)
+
+          return res.json()
+      
+  })
+  .then(data => renderCountry(data, 'neighbour'))
+  .catch(err => console.error(`${err.message}`))
 }
 
+whereIam(52.508, 13.381);
+whereIam(16.84642, 74.60458);
+whereIam(16.8738172905983, 74.6213255726496);
+whereIam(19.037, 72.873);
 
+btn.addEventListener('click', function () {
 
-btn.addEventListener('click', function(){
-  
-  getCountryData('Bharat')
+  getCountryData('India')
 })
