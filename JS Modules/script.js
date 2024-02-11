@@ -9,50 +9,50 @@ import {
     cart
 } from './shoppingCart.js'
 
-console.log(num); // 42
+// console.log(num); // 42
 
-add(3, 4) // Addition of the 3 and 4 is 7
+// add(3, 4) // Addition of the 3 and 4 is 7
 
-console.log(shippingCost); // 45
+// console.log(shippingCost); // 45
 
-const dbl = double(5)
-console.log(dbl); // 10
+// const dbl = double(5)
+// console.log(dbl); // 10
 
-addToCart(12, 'Yogart') // 12 Yogart added to cart
+// addToCart(12, 'Yogart') // 12 Yogart added to cart
 
-console.log(cart);
+// console.log(cart);
 
-import greet from './shoppingCart.js'
+// import greet from './shoppingCart.js'
 
-let message = greet('World')
+// let message = greet('World')
 
-console.log(message);
+// console.log(message);
 
 
-/* top level await */
+// /* top level await */
 
-// console.log('Fetching....');
+// // console.log('Fetching....');
 
-// const res = await fetch(`https://jsonplaceholder.typicode.com/posts`)
+// // const res = await fetch(`https://jsonplaceholder.typicode.com/posts`)
 
-// const data = await res.json()
+// // const data = await res.json()
 
-// console.log(data);
+// // console.log(data);
 
-// console.log('Done fetching.....');
+// // console.log('Done fetching.....');
 
-const getLastPost = async function() {
-    const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+// const getLastPost = async function() {
+//     const res = await fetch('https://jsonplaceholder.typicode.com/posts')
 
-    const data = await res.json()
-    console.log(data);
+//     const data = await res.json()
+//     console.log(data);
 
-    return {title: data.at(-1).title, text: data.at(-1).body}
-}
+//     return {title: data.at(-1).title, text: data.at(-1).body}
+// }
 
-const lastPost = getLastPost()
+// const lastPost = getLastPost()
 
-console.log(lastPost);
+/* console.log(lastPost);
 
 //  getting it by using regular promise
 
@@ -62,5 +62,35 @@ lastPost.then(last => console.log(last))
 // with top level await
 const lastPost2 = await getLastPost()
 
-console.log(lastPost2);
+console.log(lastPost2); */
 
+
+// 
+
+
+const shoppingCart2 = (function(){
+    const cart = []
+    const shippingCost = 10;
+    const totalCost = 237;
+    const totalQuantity = 23;
+
+    const addToCart = function(quantity, product){
+        cart.push({quantity, product})
+        console.log(`${quantity} ${product} added to cart`);
+    }
+
+
+    const orderStock = function(quantity, product){
+        cart.push({quantity, product})
+        console.log(`${quantity} ${product} ordered from supplies`);
+    }
+
+    return {
+        addToCart,
+        cart,
+        totalCost,
+        totalQuantity,
+    }
+})()
+
+shoppingCart2.addToCart('Banana', 4)
