@@ -1,13 +1,13 @@
 //  Importing modules
 
-import {
-    num,
-    add,
-    double,
-    shippingCost,
-    addToCart,
-    cart
-} from './shoppingCart.js'
+// import {
+//     num,
+//     add,
+//     double,
+//     shippingCost,
+//     addToCart,
+//     cart
+// } from './shoppingCart.js'
 
 // console.log(num); // 42
 
@@ -68,29 +68,45 @@ console.log(lastPost2); */
 // 
 
 
-const shoppingCart2 = (function(){
-    const cart = []
-    const shippingCost = 10;
-    const totalCost = 237;
-    const totalQuantity = 23;
+// const shoppingCart2 = (function(){
+//     const cart = []
+//     const shippingCost = 10;
+//     const totalCost = 237;
+//     const totalQuantity = 23;
 
-    const addToCart = function(quantity, product){
-        cart.push({quantity, product})
-        console.log(`${quantity} ${product} added to cart`);
-    }
+//     const addToCart = function(quantity, product){
+//         cart.push({quantity, product})
+//         console.log(`${quantity} ${product} added to cart`);
+//     }
 
 
-    const orderStock = function(quantity, product){
-        cart.push({quantity, product})
-        console.log(`${quantity} ${product} ordered from supplies`);
-    }
+//     const orderStock = function(quantity, product){
+//         cart.push({quantity, product})
+//         console.log(`${quantity} ${product} ordered from supplies`);
+//     }
 
-    return {
-        addToCart,
-        cart,
-        totalCost,
-        totalQuantity,
-    }
-})()
+//     return {
+//         addToCart,
+//         cart,
+//         totalCost,
+//         totalQuantity,
+//     }
+// })()
 
-shoppingCart2.addToCart('Banana', 4)
+// shoppingCart2.addToCart('Banana', 4)
+
+import cloneDeep from '../node_modules/lodash-es/cloneDeep.js'
+
+const state = {
+    cart: [
+        {product: 'Bread', quantity: 5},
+        {product: 'Pizza', quantity: 5}
+    ],
+
+    user: {loggedIn: true}
+};
+
+
+const stateClone = Object.assign({}, state)
+state.user.loggedIn = false
+console.log(stateClone);

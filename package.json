@@ -1,0 +1,15 @@
+{
+  "name": "the-complete-javascript-cource",
+  "version": "1.0.0",
+  "description": "I created this repository to track my course learnings. \r Ending javascript and going for react very soon",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "leaflet": "^1.9.4",
+    "lodash-es": "^4.17.21"
+  }
+}
